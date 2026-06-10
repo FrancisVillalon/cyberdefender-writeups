@@ -107,7 +107,7 @@ __HTTP Stream of POST request__
 In the HTTP stream, we can see the entire contents of `config.php` was returned to the attacker.
 In the contents of this file was the password.
 
-**Answer:** `Winter 2024`
+**Answer:** `Winter2024`
 
 ---
 

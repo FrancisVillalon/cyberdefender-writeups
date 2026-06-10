@@ -1,6 +1,6 @@
 # CyberDefender Writeups
 
-My personal writeups for [CyberDefenders](https://cyberdefenders.org/) blue team CTF challenges, covering malware analysis, endpoint forensics, and reverse engineering.
+My personal writeups for [CyberDefenders](https://cyberdefenders.org/) blue team CTF challenges, covering malware analysis, endpoint forensics, reverse engineering and more.
 
 ## Structure
 

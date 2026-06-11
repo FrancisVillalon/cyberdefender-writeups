@@ -42,6 +42,10 @@ The response does not look typical of a JPEG despite the `Content-Type` being de
 
 *Malicious VBS script embedded in the fake image*
 
+It is clear `http://45.126.209.4:222/mdm.jpg` is a piece of malware.
+Furthermore, the other request with the `xlm.txt` only shows a script that reconstructs an obfuscated string.
+This obfuscated string when reconstructed and deobfuscated is actually a command to download`http://45.126.209.4:222/mdm.jpg`.
+
 **Answer:** `http://45.126.209.4:222/mdm.jpg`
 
 ---

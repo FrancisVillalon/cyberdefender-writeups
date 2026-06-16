@@ -78,7 +78,7 @@ __cmdline output__
 >Recognizing detection-evasive executables is crucial for monitoring their harmful and malicious system activities. Which two applications were excluded by the malware from the previously altered application's settings?
 
 The two excluded malware can be seen from the same output in the last question.
-Powershell was invoked twice to add the exclusions for **`InvoiceCheckList.exe` and `HcdmIYYf.exe`.
+Powershell was invoked twice to add the exclusions for `InvoiceCheckList.exe` and `HcdmIYYf.exe`.
 
 **Answer:**`InvoiceCheckList.exe,HcdmIYYf.exe`
 

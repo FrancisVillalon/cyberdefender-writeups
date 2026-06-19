@@ -1,8 +1,22 @@
-# CyberDefender Writeups
+# CyberDefenders Writeups
 
-My personal writeups for [CyberDefenders](https://cyberdefenders.org/) blue team CTF challenges, covering malware analysis, endpoint forensics, reverse engineering and more.
+Personal blue team CTF writeups covering memory forensics, malware analysis, network forensics, and reverse engineering. All challenges sourced from [CyberDefenders](https://cyberdefenders.org/).
+
+## Writeup Coverage
+
+```mermaid
+xychart-beta
+    title "Writeups by Category"
+    x-axis ["Malware Analysis", "Endpoint Forensics", "Network Forensics", "Reverse Engineering"]
+    y-axis "Writeups" 0 --> 10
+    bar [7, 5, 5, 1]
+```
+
+**18 writeups** across 4 categories.
 
 ## Structure
+
+Each challenge lives in its own folder under the relevant category:
 
 ```
 category/
@@ -11,14 +25,4 @@ category/
     └── images/
 ```
 
-Each writeup documents my methodology, tools, and reasoning for solving the challenge.
-
-## Progress
-
-```mermaid
-pie title Writeups by Category
-    "Malware Analysis" : 7
-    "Endpoint Forensics" : 5
-    "Network Forensics" : 5
-    "Reverse Engineering" : 1
-```
+Writeups cover the full methodology — tools used, approach per question, and reasoning behind each finding.

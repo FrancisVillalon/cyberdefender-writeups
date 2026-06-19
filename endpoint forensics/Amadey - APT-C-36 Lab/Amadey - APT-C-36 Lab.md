@@ -2,10 +2,6 @@
 
 # Amadey - APT-C-36 Lab (CyberDefenders - Medium)
 
-**Summary:** A memory dump of a compromised Windows workstation is analyzed to investigate the Amadey Trojan Stealer. The malware disguises itself as `lsass.exe` (named `lssass.exe`), communicates with an external C2 server to fetch additional DLLs, and persists via a scheduled task. Analysis was performed using Volatility3 to trace the process tree, network connections, and file artifacts.
-
-**Tools:** Volatility3, grep, strings
-
 # Scenario
 An after-hours alert from the Endpoint Detection and Response (EDR) system flags suspicious activity on a Windows workstation. The flagged malware aligns with the Amadey Trojan Stealer. Your job is to analyze the presented memory dump and create a detailed report for actions taken by the malware.
 

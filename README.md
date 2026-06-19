@@ -12,3 +12,13 @@ category/
 ```
 
 Each writeup documents my methodology, tools, and reasoning for solving the challenge.
+
+## Progress
+
+```mermaid
+pie title Writeups by Category
+    "Malware Analysis" : 7
+    "Endpoint Forensics" : 5
+    "Network Forensics" : 5
+    "Reverse Engineering" : 1
+```

@@ -9,10 +9,10 @@ xychart-beta
     title "Writeups by Category"
     x-axis ["Malware Analysis", "Endpoint Forensics", "Network Forensics", "Reverse Engineering", "Threat Hunting"]
     y-axis "Writeups" 0 --> 10
-    bar [8, 6, 7, 1, 1]
+    bar [8, 6, 8, 1, 1]
 ```
 
-**23 writeups** across 5 categories.
+**24 writeups** across 5 categories.
 
 ## Structure
 

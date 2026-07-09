@@ -1,12 +1,11 @@
-#network-forensics #python3 #cyberdefender-easy #virusTotal #powershell #wireshark #finished #reviewed #remnux
-
-# XLMRat Lab (CyberDefenders - Easy)
-
-**Summary:** A compromised machine generated suspicious network traffic traced to a disguised PowerShell dropper downloaded from a raw IP as a fake JPEG. Two hex-encoded binaries were embedded in the payload — a loader and the main AsyncRAT executable — identified by analysing the obfuscated script logic. Key tools were Wireshark for traffic and object extraction, CyberChef for binary conversion and hashing, and VirusTotal and peframe for static analysis.
-
-**Tools:** Wireshark, CyberChef, VirusTotal, peframe, REMnux
-
 ---
+title: XLMRat Lab
+parent: Network Forensics
+nav_order: 7
+difficulty: Easy
+---
+
+#network-forensics #python3 #cyberdefender-easy #virusTotal #powershell #wireshark #finished #reviewed #remnux
 
 # Scenario
 

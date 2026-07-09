@@ -1,3 +1,10 @@
+---
+title: BlackEnergy
+parent: Endpoint Forensics
+nav_order: 3
+difficulty: Medium
+---
+
 #volatility2 #endpoint-forensics #ldrmodules #injected-dll #cyberdefender-medium #reviewed #finished 
 # Scenario
 

@@ -1,10 +1,11 @@
+---
+title: Andromeda Bot - UNC4210 Lab
+parent: Endpoint Forensics
+nav_order: 2
+difficulty: Medium
+---
+
 #endpoint-forensics #MemProcFS #VirusTotal #EvtxECmd #TimelineExplorer #ZimmermanTools #cyberdefender-medium #finished #reviewed #CyberDefenders #CyberSecurity #BlueYard #BlueTeam #InfoSec #SOC #SOCAnalyst #DFIR #CCD #CyberDefender
-
-# Andromeda Bot - UNC4210 Lab (CyberDefenders - Medium)
-
-**Summary:** A Windows crash dump from a compromised endpoint was analyzed to investigate a breach propagated via removable USB devices. Memory triage with Volatility and MemProcFS uncovered an `explorer.exe > cmd.exe > powershell.exe` process chain that disabled Windows Defender and launched an Andromeda botnet payload from a USB drive. VirusTotal threat intelligence traced the dropped executable and C2 domain to a campaign attributed to the Turla APT group.
-
-**Tools:** Volatility 3, MemProcFS, EvtxECmd, Timeline Explorer, VirusTotal
 
 # Scenario
 As a member of the DFIR team at SecuTech, you're tasked with investigating a security breach affecting multiple endpoints across the organization. Alerts from different systems suggest the breach may have spread via removable devices. You've been provided with a memory image from one of the compromised machines. Your objective is to analyze the memory for signs of malware propagation, trace the infection's source, and identify suspicious activity to assess the full extent of the breach and inform the response strategy.

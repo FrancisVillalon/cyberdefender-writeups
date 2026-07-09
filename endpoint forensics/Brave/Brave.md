@@ -1,10 +1,11 @@
+---
+title: Brave
+parent: Endpoint Forensics
+nav_order: 4
+difficulty: Medium
+---
+
 #endpoint-forensics #volatility3 #hex-dump #byte-offset #cyberdefender-medium #reviewed #finished
-
-# Brave (CyberDefenders · Medium)
-
-**Summary:** A Windows memory image is analyzed to recover system timestamps, process details, and user activity. Key techniques include process listing and executable dumping, network connection scanning with IP-to-domain pivoting, hex offset analysis, and registry UserAssist parsing. Volatility 3 is the primary analysis tool throughout.
-
-**Tools:** Volatility 3, xxd, HxD, PowerShell
 
 # Scenario
 

@@ -1,6 +1,21 @@
 title: CyberDefender Writeups
 description: Blue team CTF writeups covering malware analysis, endpoint forensics, network forensics, reverse engineering, and threat hunting.
-theme: jekyll-theme-slate
+url: "https://francisvillalon.github.io"
+baseurl: "/cyberdefender-writeups"
+
+remote_theme: just-the-docs/just-the-docs
+
+plugins:
+  - jekyll-remote-theme
+
+color_scheme: dark
+search_enabled: true
+heading_anchors: true
+nav_sort: case_insensitive
+
+aux_links:
+  "View on GitHub":
+    - "https://github.com/FrancisVillalon/cyberdefender-writeups"
 
 defaults:
   - scope:
@@ -11,3 +26,7 @@ defaults:
 exclude:
   - "under review/"
   - ".claude/"
+  - "README.md"
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "vendor/"

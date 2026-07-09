@@ -1,3 +1,10 @@
+---
+title: Amadey - APT-C-36 Lab
+parent: Endpoint Forensics
+nav_order: 1
+difficulty: Medium
+---
+
 #cyberdefender-medium #endpoint-forensics #volatility3 #finished #reviewed
 
 # Amadey - APT-C-36 Lab (CyberDefenders - Medium)

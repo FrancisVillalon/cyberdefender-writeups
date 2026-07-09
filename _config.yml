@@ -1,0 +1,13 @@
+title: CyberDefender Writeups
+description: Blue team CTF writeups covering malware analysis, endpoint forensics, network forensics, reverse engineering, and threat hunting.
+theme: jekyll-theme-cayman
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+exclude:
+  - "under review/"
+  - ".claude/"

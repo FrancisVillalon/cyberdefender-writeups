@@ -1,10 +1,3 @@
----
-title: NerisBot
-parent: Threat Hunting
-nav_order: 2
-difficulty: Easy
----
-
 #cyberdefender-easy #threat-hunting #splunk #finished #reviewed
 # Scenario
 Unusual network activity has been detected within a university environment, indicating potential malicious intent. These anomalies, observed six hours ago, suggest the presence of command and control (C2) communications and other harmful behaviors within the network.

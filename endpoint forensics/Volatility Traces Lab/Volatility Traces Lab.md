@@ -1,10 +1,3 @@
----
-title: Volatility Traces Lab
-parent: Endpoint Forensics
-nav_order: 7
-difficulty: Easy
----
-
 #volatility3 #endpoint-forensics #cyberdefender-easy #finished #reviewed 
 # Scenario
 On May 2, 2024, a multinational corporation identified suspicious PowerShell processes on critical systems, indicating a potential malware infiltration. This activity poses a threat to sensitive data and operational integrity.

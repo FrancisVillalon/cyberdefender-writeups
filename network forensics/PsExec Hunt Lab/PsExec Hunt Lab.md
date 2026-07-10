@@ -1,10 +1,3 @@
----
-title: PsExec Hunt Lab
-parent: Network Forensics
-nav_order: 3
-difficulty: Easy
----
-
 #network-forensics #wireshark #cyberdefender-easy #finished #reviewed #CyberDefenders #CyberSecurity #BlueYard #BlueTeam #InfoSec #SOC #SOCAnalyst #DFIR #CCD #CyberDefender
 
 # Scenario

@@ -1,10 +1,3 @@
----
-title: DumpMe
-parent: Endpoint Forensics
-nav_order: 5
-difficulty: Medium
----
-
 #endpoint-forensics #volatility2 #powershell #shimcache #strings #cyberdefender-medium #reviewed #finished 
 # Scenario
 A SOC analyst took a memory dump from a machine infected with a meterpreter malware. As a Digital Forensicator, your job is to analyze the dump, extract the available indicators of compromise (IOCs) and answer the provided questions.

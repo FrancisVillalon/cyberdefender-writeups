@@ -1,10 +1,3 @@
----
-title: QBot
-parent: Endpoint Forensics
-nav_order: 6
-difficulty: Medium
----
-
 #cyberdefender-medium #endpoint-forensics #finished #reviewed
 # Scenario
 A company's security team detected unusual network activity linked to a potential malware infection. As a forensic analyst, your mission is to investigate a memory dump, identify the malicious process, extract artifacts, and uncover Command and Control (C2) communications. Using `Volatility3`, analyze the attack, trace its origin, and provide actionable intelligence.

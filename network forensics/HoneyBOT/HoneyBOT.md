@@ -1,10 +1,3 @@
----
-title: HoneyBOT
-parent: Network Forensics
-nav_order: 1
-difficulty: Medium
----
-
 #cyberdefender-medium #zui/brim #wireshark #scdbg #network-forensics #finished #reviewed
 # Scenario
 A PCAP analysis exercise highlighting attacker's interactions with honeypots and how automatic exploitation works.. (Note that the IP address of the victim has been changed to hide the true location.)

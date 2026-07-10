@@ -1,10 +1,3 @@
----
-title: RCEMiner Lab
-parent: Network Forensics
-nav_order: 4
-difficulty: Medium
----
-
 #network-forensics #cyberdefender-medium #wireshark #finished #reviewed #CyberDefenders #CyberSecurity #BlueYard #BlueTeam #InfoSec #SOC #SOCAnalyst #DFIR #CCD #CyberDefender
 
 # Scenario

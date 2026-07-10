@@ -1,8 +1,2 @@
 .claude/
 under review/
-_site/
-.jekyll-cache/
-.jekyll-metadata
-Gemfile.lock
-.env
-.bundle-cache/

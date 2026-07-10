@@ -1,10 +1,3 @@
----
-title: Brave
-parent: Endpoint Forensics
-nav_order: 4
-difficulty: Medium
----
-
 #endpoint-forensics #volatility3 #hex-dump #byte-offset #cyberdefender-medium #reviewed #finished
 
 # Scenario

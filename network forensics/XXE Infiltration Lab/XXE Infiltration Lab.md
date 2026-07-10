@@ -1,10 +1,3 @@
----
-title: XXE Infiltration Lab
-parent: Network Forensics
-nav_order: 8
-difficulty: Easy
----
-
 #network-forensics #cyberdefender-easy #wireshark #zui/brim #finished #reviewed
 # Scenario
 

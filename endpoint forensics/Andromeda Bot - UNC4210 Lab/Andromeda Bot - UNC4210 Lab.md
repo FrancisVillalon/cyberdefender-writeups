@@ -1,10 +1,3 @@
----
-title: Andromeda Bot - UNC4210 Lab
-parent: Endpoint Forensics
-nav_order: 2
-difficulty: Medium
----
-
 #endpoint-forensics #MemProcFS #VirusTotal #EvtxECmd #TimelineExplorer #ZimmermanTools #cyberdefender-medium #finished #reviewed #CyberDefenders #CyberSecurity #BlueYard #BlueTeam #InfoSec #SOC #SOCAnalyst #DFIR #CCD #CyberDefender
 
 # Scenario

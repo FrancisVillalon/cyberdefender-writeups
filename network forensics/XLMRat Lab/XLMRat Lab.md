@@ -1,10 +1,3 @@
----
-title: XLMRat Lab
-parent: Network Forensics
-nav_order: 7
-difficulty: Easy
----
-
 #network-forensics #python3 #cyberdefender-easy #virusTotal #powershell #wireshark #finished #reviewed #remnux
 
 # Scenario

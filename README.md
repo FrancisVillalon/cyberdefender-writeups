@@ -2,6 +2,8 @@
 
 Personal blue team CTF writeups covering memory forensics, malware analysis, network forensics, reverse engineering, and threat hunting. All challenges sourced from [CyberDefenders](https://cyberdefenders.org/).
 
+To view the writeups more easily, you can read them [here](https://fdv.sh/cyberdefender-writeups/).
+
 ## Writeup Coverage
 
 ```mermaid

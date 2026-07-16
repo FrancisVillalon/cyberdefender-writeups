@@ -1,4 +1,5 @@
 #network-forensics #cyberdefender-easy #wireshark #network-miner #zui/brim #finished #reviewed 
+Published: 2026-06-11
 # Scenario
 In recent days, ShopSphere, a prominent online retail platform, has experienced unusual administrative login activity during late-night hours. These logins coincide with an influx of customer complaints about unexplained account anomalies, raising concerns about a potential security breach. Initial observations suggest unauthorized access to administrative accounts, potentially indicating deeper system compromise.
 

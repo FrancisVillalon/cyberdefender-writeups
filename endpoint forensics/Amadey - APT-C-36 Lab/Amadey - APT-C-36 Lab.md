@@ -1,4 +1,5 @@
 #cyberdefender-medium #endpoint-forensics #volatility3 #finished #reviewed
+Published: 2026-06-20
 
 # Amadey - APT-C-36 Lab (CyberDefenders - Medium)
 

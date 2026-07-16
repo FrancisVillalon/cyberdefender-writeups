@@ -1,4 +1,5 @@
 #volatility2 #endpoint-forensics #ldrmodules #injected-dll #cyberdefender-medium #reviewed #finished 
+Published: 2026-05-30
 # Scenario
 
 A multinational corporation has suffered a cyber attack, resulting in the theft of sensitive data. The attack employed a previously unseen variant of the BlackEnergy v2 malware. The company's security team has obtained a memory dump from the infected machine and is seeking your expertise as a SOC analyst to analyze the dump in order to understand the scope and impact of the attack.

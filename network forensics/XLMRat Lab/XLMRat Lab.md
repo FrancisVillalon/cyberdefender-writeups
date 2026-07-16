@@ -1,4 +1,5 @@
 #network-forensics #python3 #cyberdefender-easy #virusTotal #powershell #wireshark #finished #reviewed #remnux
+Published: 2026-06-12
 
 # Scenario
 

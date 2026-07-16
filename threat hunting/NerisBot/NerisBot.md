@@ -1,4 +1,5 @@
 #cyberdefender-easy #threat-hunting #splunk #finished #reviewed
+Published: 2026-07-10
 # Scenario
 Unusual network activity has been detected within a university environment, indicating potential malicious intent. These anomalies, observed six hours ago, suggest the presence of command and control (C2) communications and other harmful behaviors within the network.
 

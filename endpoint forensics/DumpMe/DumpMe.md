@@ -1,4 +1,5 @@
 #endpoint-forensics #volatility2 #powershell #shimcache #strings #cyberdefender-medium #reviewed #finished 
+Published: 2026-05-30
 # Scenario
 A SOC analyst took a memory dump from a machine infected with a meterpreter malware. As a Digital Forensicator, your job is to analyze the dump, extract the available indicators of compromise (IOCs) and answer the provided questions.
 

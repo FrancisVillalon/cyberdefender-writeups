@@ -1,4 +1,5 @@
 #endpoint-forensics #volatility3 #hex-dump #byte-offset #cyberdefender-medium #reviewed #finished
+Published: 2026-05-30
 
 # Scenario
 

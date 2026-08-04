@@ -17,7 +17,7 @@ The intuition is that we want to check if there are IP addresses which an anomal
 
 ![](images/image-648.webp)
 
-*Output of conversation statistics sorted by packets descending*
+__Output of conversation statistics sorted by packets descending__
 
 We can see a few interesting IPs
 - `36.96.48.3`
@@ -29,14 +29,14 @@ Let's try checking the HTTP traffic of `36.96.48.3` see if we discover anything 
 
 ![](images/image-649.webp)
 
-*HTTP traffic of `36.96.48.3`*
+__HTTP traffic of `36.96.48.3`__
 
 What immediately stands out to me is frame number `58` as it looks like a malicious POST request made to `36.96.48.3`.
 If we follow the HTTP stream we will find the following,
 
 ![](images/image-650.webp)
 
-*HTTP stream of malicious POST*
+__HTTP stream of malicious POST__
 
 In the body we can see a `php` script that grabs a resource from `http://1.80.23.4:8000/` using `curl`.
 Furthermore, the way they get the server to even execute this script in the first place is through specially crafted URL query parameters.
@@ -79,7 +79,7 @@ Let's filter for other POST requests that this IP may have possibly made by usin
 
 ![](images/image-651.webp)
 
-*Output of filter*
+__Output of filter__
 
 If we inspect the POST bodies of frame numbers `216` and `255` we will find the following.
 
@@ -87,27 +87,27 @@ In frame number 216, we will see that he is downloading and executing a PowerShe
 
 ![](images/image-652.webp)
 
-*Packet 216*
+__Packet 216__
 
 In frame number 255, we will see that he is downloading and executing an executable with name `2.exe` located in `C:\Windows\Temp`
 
 ![](images/image-653.webp)
 
-*Packet 255*
+__Packet 255__
 
 Let's investigate the frames between 216 and 255 to see what was returned to the attacker in this period.
 Let's also filter by HTTP and see what we find.
 
 ![](images/image-654.webp)
 
-*Filter output*
+__Filter output__
 
 We can see after the exploit, the server makes a GET request for the malicious PowerShell script.
 If we look at frame `224` we can actually extract the script which is the following,
 
 ![](images/image-655.webp)
 
-*`1.ps`*
+__`1.ps`__
 
 The actual payload is base64 encoded so we need to decode that first.
 
@@ -121,14 +121,14 @@ We can see this request being made with frame number `233`.
 
 ![](images/image-657.webp)
 
-*Frame number `233`*
+__Frame number `233`__
 
 Where if we look in the body we will see information about the server's CPU etc.
 Which if we copy and use CyberChef to make it more readable we get,
 
 ![](images/image-658.webp)
 
-*`1.txt` contents*
+__`1.txt` contents__
 
 Therefore, the model of the CPU identified is `Intel(R) Core(TM) i7-6700HQ`.
 
@@ -145,7 +145,7 @@ We identified in frame number `255` a command to download and run an executable.
 
 ![](images/image-659.webp)
 
-*Frame number `255`*
+__Frame number `255`__
 
 Which is
 
@@ -178,7 +178,7 @@ We can look for this traffic by using the filter `ip.src == 36.96.48.3 && http &
 
 ![](images/image-660.webp)
 
-*Output of filter*
+__Output of filter__
 
 Which shows us the traffic originating from the compromised web server.
 If we inspect the requests being made we will see the string `/think\app` appear regularly.
@@ -201,14 +201,14 @@ This question is trivially answered by a quick Google search.
 
 ![](images/image-661.webp)
 
-*MITRE ATT&CK Mapping*
+__MITRE ATT&CK Mapping__
 
 Therefore, the answer is `T1071.004`.
 However, let's have a look at how the DNS requests the server was making.
 
 ![](images/image-662.webp)
 
-*DNS requests being made by `36.96.48.3`*
+__DNS requests being made by `36.96.48.3`__
 
 The domain `auto.c3pool.org` is a Monero (XMR) cryptocurrency mining pool endpoint and is known to be used for malicious activity.
 `c3pool` is a global all-in-one mining pool platform that allows users to connect their mining hardware to contribute to the collective effort of mining blocks.
@@ -230,7 +230,7 @@ For instance, if we look at the packet below,
 
 ![](images/image-664.webp)
 
-*Frame `10151`*
+__Frame `10151`__
 
 We can see the URI query parameters being set.
 One of the query parameters when URL decoded is `C:\ProgramData\spread.exe`.
@@ -250,7 +250,7 @@ In `Q6`, we touched on how the compromised web server was making suspicious DNS 
 
 ![](images/image-665.webp)
 
-*Suspicious DNS request*
+__Suspicious DNS request__
 
 The compromised web server is making a DNS request to resolve the domain `nishabii.xyz`.
 This domain looks highly suspicious.
@@ -258,20 +258,20 @@ If we pass this domain to VirusTotal we will see that it is a known domain for m
 
 ![](images/image-666.webp)
 
-*`nishabii.xyz` VirusTotal report*
+__`nishabii.xyz` VirusTotal report__
 
 Furthermore, this domain resolves to the IP `218.244.58.70`.
 Let's investigate the traffic between the compromised web server and this IP.
 
 ![](images/image-667.webp)
 
-*Traffic containing IP `218.244.58.70`*
+__Traffic containing IP `218.244.58.70`__
 
 Let's look specifically at the traffic with the push flag set as this is what actually contains the data.
 
 ![](images/image-668.webp)
 
-*Filtering only for packets with push flag set*
+__Filtering only for packets with push flag set__
 
 If we click into any of the packets we will see that the payload looks like metrics of some sort delimited by a `|`.
 We can also see the destination port is `9011`.
@@ -291,20 +291,20 @@ Let's check what IP this domain resolves to.
 
 ![](images/image-669.webp)
 
-*DNS Response for `auto.c3pool.org`*
+__DNS Response for `auto.c3pool.org`__
 
 The domain resolves to `43.129.150.155`.
 Let's look at traffic containing this IP address.
 
 ![](images/image-670.webp)
 
-*Filtering for traffic*
+__Filtering for traffic__
 
 The traffic is TCP, let's filter for packets containing the push flag to see the actual data.
 
 ![](images/image-671.webp)
 
-*TCP traffic with push flag set*
+__TCP traffic with push flag set__
 
 In the payload we see a `json` containing some details.
 If we dump this we will get

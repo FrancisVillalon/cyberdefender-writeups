@@ -1,7 +1,7 @@
 .claude/
-under review/
 snapshots/
 scripts/
+logs/
 .DS_Store
 */.DS_Store
 threat\ hunting/ExampleWriteUp

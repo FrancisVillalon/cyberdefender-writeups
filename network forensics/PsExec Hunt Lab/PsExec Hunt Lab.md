@@ -13,7 +13,7 @@ Let's start with `Statistics > Endpoints`.
 
 ![](images/5cdcf19a5b65b758f184b0336ae496b5c3d61996bc6537455eae29317b24efbe.webp)
 
-*Endpoints statistics sorted by packet count*
+__Endpoints statistics sorted by packet count__
 
 We can see that majority of the traffic is concentrated around 2 IPs which are 
 - `10.0.0.130`
@@ -23,7 +23,7 @@ Let's continue under `Statistics > Conversations`.
 
 ![](images/94ad941aa1e78ac92124c0c71d4c75c866dcf1126aca3696f0a1a68010772551.webp)
 
-*Conversations statistics sorted by packet count*
+__Conversations statistics sorted by packet count__
 
 We can also see that most of the traffic is just `10.0.0.130` communicating with `10.0.0.133`.
 Furthermore, notice how `10.0.0.130` also communicates with `10.0.0.131`.
@@ -33,7 +33,7 @@ Let's continue in `Statistics > I/O Graphs`.
 
 ![](images/442c46bc69d1155d47b8ae38e93c24ac9429f6ab42074830a11de07e3884d000.webp)
 
-*I/O graph of the capture*
+__I/O graph of the capture__
 
 The captured traffic is mostly flat in the beginning then spikes extremely high.
 After which it returns to much lower traffic with a few more shorter spikes after.
@@ -43,7 +43,7 @@ Let's conclude our initial triage with `Statistics > Protocol Hierarchy`.
 
 ![](images/8de23a41b607b375cc8c1e92e216069e74fafdd456a9c1f61db142304815e67a.webp)
 
-*Protocol hierarchy statistics*
+__Protocol hierarchy statistics__
 
 This tells us the following,
 - Almost all packets is TCP
@@ -69,7 +69,7 @@ Which gives us,
 
 ![](images/image-692.webp)
 
-*Wireshark output filtered for SMB/SMB2 traffic from 10.0.0.130*
+__Wireshark output filtered for SMB/SMB2 traffic from 10.0.0.130__
 
 If we inspect the output we can tell that `10.0.0.130` is the endpoint and `10.0.0.133` is the SMB server.
 This is evident when `10.0.0.133` responds with `Session Setup Response` and `Tree Connect Response` to the corresponding requests of `10.0.0.130`.
@@ -82,7 +82,7 @@ Which we will see below,
 
 ![](images/image-695.webp)
 
-*Frame 132 — NTLMv2 response revealing hostnames and the authenticating user*
+__Frame 132 — NTLMv2 response revealing hostnames and the authenticating user__
 
 We can see in NTLMv2 response that the NetBIOS computer name of `10.0.0.133` is `SALES-PC`.
 Furthermore, we will see under negTokenTarg that `10.0.0.130` is authenticating as `ssales` and has host name `HR-PC`.
@@ -91,7 +91,7 @@ Furthermore, if we inspect the actions the authenticated user does , we will see
 
 ![](images/image-696.webp)
 
-*Actions conducted by the authenticated user on the ADMIN$ share*
+__Actions conducted by the authenticated user on the ADMIN$ share__
 
 He navigates to the `ADMIN$` share then uploads a `PSEXECSVC.exe` file which is the remote agent component of PsExec.
 It is a remote administration tool.
@@ -138,7 +138,7 @@ Which gives us,
 
 ![](images/image-697.webp)
 
-*ZUI output showing SMB file creation events across targeted machines*
+__ZUI output showing SMB file creation events across targeted machines__
 
 We can see that the attacker creates the file on `10.0.0.133`.
 Furthermore, we can see the attacker also creates the file on `10.0.0.131`.
@@ -170,7 +170,7 @@ This is why you see 4 separate session keys being created in our ZUI output whic
 
 ![](images/image-698.webp)
 
-*Wireshark and ZUI output side by side showing IPC$ Tree Connect re-negotiations*
+__Wireshark and ZUI output side by side showing IPC$ Tree Connect re-negotiations__
 
 **Answer:** `IPC$`
 
@@ -189,7 +189,7 @@ Giving us the following,
 
 ![](images/image-699.webp)
 
-*Session Setup response revealing the hostname of the second targeted machine*
+__Session Setup response revealing the hostname of the second targeted machine__
 
 Which tells us `10.0.0.131` has host name `MARKETING-PC`.
 

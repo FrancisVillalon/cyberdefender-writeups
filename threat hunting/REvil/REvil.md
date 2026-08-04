@@ -33,7 +33,7 @@ Which gives us the following results
 
 ![](images/image-800.webp)
 
-*Results of query*
+__Results of query__
 
 3 logs are shown as a result and if we look at the `TargetFilename` we find that the `txt` is prefixed by a random short UID.
 The file location is also on `Desktop` and if we aggregate by count on `TargetFilename`,`hostname` and `@timestamp`.
@@ -41,7 +41,7 @@ We will see that the same file was actually dropped into every `Desktop` directo
 
 ![](images/image-801.webp)
 
-*Aggregate result*
+__Aggregate result__
 
 This fits the description of what was described in our scenario and has characteristics of a typical ransom note.
 Therefore, the answer is `5uizv5660t-readme.txt`
@@ -66,7 +66,7 @@ Which gives us
 
 ![](images/image-802.webp)
 
-*Finding `ProcessID`*
+__Finding `ProcessID`__
 
 Therefore, our answer is `5348`.
 
@@ -106,7 +106,7 @@ This returns a single log in our dataset which is the following,
 
 ![](images/image-803.webp)
 
-*Malicious child process*
+__Malicious child process__
 
 Looks like the malware spawned a `powershell.exe` process and invoked it with the following `CommandLine`.
 
@@ -119,7 +119,7 @@ If we decode the string we will get the following,
 
 ![](images/image-804.webp)
 
-*Decoding base64 string*
+__Decoding base64 string__
 
 This command deletes every shadow copy snapshot found on the system.
 A shadow copy is a point-in-time snapshot of a volume's data, and by deleting all of them, the ransomware ensures the victim has no built-in means of recovering their data. Thereby, leaving payment of the ransom as the only apparent option.
@@ -142,7 +142,7 @@ Which gets us,
 
 ![](images/image-805.webp)
 
-*Returned table*
+__Returned table__
 
 Then under `winlog.event_data.Hashes` we find 
 
@@ -166,7 +166,7 @@ Let's try searching on `tria.ge` .
 
 ![](images/image-807.webp)
 
-*Searching malware hash on `tria.ge`*
+__Searching malware hash on `tria.ge`__
 
 We have two hits.
 Let's click into the [first one](https://tria.ge/260212-qazsyabv9d) and see if we can find any hints on the ransomware author's onion domain.
@@ -175,7 +175,7 @@ Inside this template are instructions on how to navigate to their onion domain t
 
 ![](images/image-808.webp)
 
-*Ransom template*
+__Ransom template__
 
 Therefore, our answer is `aplebzu47wgazapdqks6vrcv6zcnjppkbxbr6wketf56nf6aq2nmyoyd.onion`
 

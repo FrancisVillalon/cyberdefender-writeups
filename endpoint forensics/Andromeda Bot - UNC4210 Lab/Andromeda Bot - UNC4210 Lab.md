@@ -12,7 +12,7 @@ Let's first check the basic info of the memory dump.
 
 ![](images/image-694.webp)
 
-*`windows.info.Info` output*
+__`windows.info.Info` output__
 
 We can see the Windows version is Windows 10 and the system clock was at `2024-10-04 13:52 UTC`.
 Also note that this is a `.dmp` file meaning it's a Windows crash dump.
@@ -21,7 +21,7 @@ Let's now output the `pslist` into a file and see if we can find anything intere
 
 ![](images/image-700.webp)
 
-*Output `pslist` into `windows.pslist.out`*
+__Output `pslist` into `windows.pslist.out`__
 
 Let's search for the following using `sls`
 - `cmd.exe`
@@ -30,7 +30,7 @@ The intuition is that I am trying to find any suspicious parent child relationsh
 
 ![](images/image-701.webp)
 
-*Searching for PowerShell and cmd*
+__Searching for PowerShell and cmd__
 
 We can see that cmd was spawned by `5028`.
 We can also see that PowerShell was spawned by the cmd processes.
@@ -39,7 +39,7 @@ As seen below.
 
 ![](images/image-702.webp)
 
-*Finding pid `5028`*
+__Finding pid `5028`__
 
 ### Cmdline
 
@@ -48,13 +48,13 @@ We can also check this output for other interesting artifacts like odd files exe
 
 ![](images/image-703.webp)
 
-*Creating `windows.cmdline.out`*
+__Creating `windows.cmdline.out`__
 
 If we `sls` for `explorer.exe`, `cmd.exe` and `powershell.exe` we will see the following,
 
 ![](images/image-704.webp)
 
-*Output of `sls` for processes*
+__Output of `sls` for processes__
 
 We cannot find anything useful from the `cmdline` but now we know that both `cmd` and PowerShell ran and exited cleanly.
 We can however find a username from the dump by `sls 'appdata' .\windows.cmdline.out`.
@@ -62,7 +62,7 @@ Which gives us `Tomy` as well as some really long output from `chrome.exe` as se
 
 ![](images/image-705.webp)
 
-*`sls appdata` output*
+__`sls appdata` output__
 
 ### Netscan
 We are not getting much back from `pslist` and `cmdline` but perhaps we can find some evidence of callbacks to the C2 that we can identify.
@@ -71,7 +71,7 @@ First we run the following command.
 
 ![](images/image-706.webp)
 
-*Creating `windows.netscan.out`*
+__Creating `windows.netscan.out`__
 
 Then we just `sls` the following terms
 - `ESTABLISHED` -> actively talking at point of dump
@@ -80,7 +80,7 @@ Then we just `sls` the following terms
 
 ![](images/image-707.webp)
 
-*Output of `sls`*
+__Output of `sls`__
 
 There are some potential connections which might be suspicious as they occur over unencrypted channels, for instance
 - `SearchApp.exe` recently closed connection to `13.107.246.62` over port `80` which is not encrypted.
@@ -107,7 +107,7 @@ We will output this to `windows.filescan.out` so we can run some `sls` queries o
 
 ![](images/image-709.webp)
 
-*Creating the `windows.filescan.out` file*
+__Creating the `windows.filescan.out` file__
 
 Notice that we also have to set the `PYTHONIOENCODING` to `utf-8`.
 This was done because some filenames contain characters that the default PowerShell console encoding cannot represent.
@@ -117,7 +117,7 @@ Now all we have to do is search for `evtx` which is the file extension for Windo
 
 ![](images/image-710.webp)
 
-*`evtx` logs found in `windows.filescan.out`*
+__`evtx` logs found in `windows.filescan.out`__
 
 Fortunately, we managed to output a large list of Windows event logs.
 Now we need to know what logs we are looking for.
@@ -138,7 +138,7 @@ sls ".evtx" .\windows.filescan.out | sls 'System\.evtx|Microsoft-Windows-DriverF
 
 ![](images/image-711.webp)
 
-*Checking what logs are present*
+__Checking what logs are present__
 
 We can see that the majority of the logs are present except for `Microsoft-Windows-DriverFrameworks-UserMode%4Operational.evtx`.
 Let's carve these files out.
@@ -147,7 +147,7 @@ Let's carve these files out.
 
 ![](images/image-717.webp)
 
-*Carving files out*
+__Carving files out__
 
 Notice how two file types are carved out for each log file.
 One is `vacb` and one is `dat`.
@@ -157,7 +157,7 @@ Therefore, we want to be analyzing the `vacb` files.
 
 ![](images/image-713.webp)
 
-*File size difference*
+__File size difference__
 
 #### Parsing the Log Files Using EvtxECmd.exe
 We can now pass these files to `EvtxECmd.exe` to have them parsed.
@@ -166,7 +166,7 @@ So we have something like this.
 
 ![](images/image-714.webp)
 
-*Shorter filenames and correct extensions*
+__Shorter filenames and correct extensions__
 
 Now we pass these files to `EvtxECmd.exe`.
 Using the `Microsoft-Windows-Ntfs-Operational.evtx` as an example we use the command
@@ -179,20 +179,20 @@ Which then gives us the following output
 
 ![](images/image-715.webp)
 
-*Output of parsing tool*
+__Output of parsing tool__
 
 as well as the csv file with all the data
 
 ![](images/image-716.webp)
 
-*Exported csv*
+__Exported csv__
 
 We can also just drag and drop the `evtx` files into `ELEX` to open them.
 As shown below,
 
 ![](images/image-718.webp)
 
-*ELEX output*
+__ELEX output__
 
 ### Automatically Getting Log Files & More (MemProcFS)
 
@@ -215,7 +215,7 @@ As shown below,
 
 ![](images/image-740.webp)
 
-*Wiki page from official MemProcFS GitHub repo ([_CommandLine · ufrisk/MemProcFS Wiki](https://github.com/ufrisk/MemProcFS/wiki/_CommandLine))*
+__Wiki page from official MemProcFS GitHub repo ([_CommandLine · ufrisk/MemProcFS Wiki](https://github.com/ufrisk/MemProcFS/wiki/_CommandLine))__
 
 That's great but what does this mean for us as analysts.
 It means that a lot of the forensic heavy lifting will be done by the program and we can just browse the results in the mounted drive.
@@ -225,13 +225,13 @@ Running the command will yield us the following,
 
 ![](images/image-719.webp)
 
-*Command output*
+__Command output__
 
 And in the file explorer, the mounted drive as seen below,
 
 ![](images/image-741.webp)
 
-*Mounted drive*
+__Mounted drive__
 
 If we click into `M:\forensic` too early, the forensic analysis may have not yet completed.
 Therefore, we will not be able to view the results yet.
@@ -245,7 +245,7 @@ Which gives us something like this
 
 ![](images/image-720.webp)
 
-*Checking progress*
+__Checking progress__
 
 Once it reaches 100, we just `Ctrl+C` the program and view the results.
 With this we can now answer the questions in the lab.
@@ -266,7 +266,7 @@ Below, is the source code for the script.
 
 ![](images/image-742.webp)
 
-*Source for `usb_storage` script ([pyp_reg_root_reg$usb_usb$storage.py · ufrisk/MemProcFS](https://github.com/ufrisk/MemProcFS/blob/master/files/plugins/pyp_reg_root_reg%24usb_usb%24storage.py))*
+__Source for `usb_storage` script ([pyp_reg_root_reg$usb_usb$storage.py · ufrisk/MemProcFS](https://github.com/ufrisk/MemProcFS/blob/master/files/plugins/pyp_reg_root_reg%24usb_usb%24storage.py))__
 
 Let's look into this folder and see what we can find.
 If we navigate into `M:\py\reg\usb` we will find two files which are `usb_devices` and `usb_storage`.
@@ -274,7 +274,7 @@ The one we care about is `usb_storage` and it tells us the serial number of the 
 
 ![](images/image-743.webp)
 
-*`usb_storage.txt`*
+__`usb_storage.txt`__
 
 **Answer:** `7095411056659025437&0`
 
@@ -312,13 +312,13 @@ This command invokes `EvtxECmd.exe`, specifies the directory where our logs resi
 
 ![](images/image-744.webp)
 
-*Snippet of `EvtxECmd.exe` output*
+__Snippet of `EvtxECmd.exe` output__
 
 We can then just drag and drop this into Timeline Explorer which gives us the following,
 
 ![](images/image-745.webp)
 
-*`results.csv` loaded into Timeline Explorer*
+__`results.csv` loaded into Timeline Explorer__
 
 With now a complete view of all Windows logs we can search for key terms in the logs.
 We found out in our initial triage that there was a suspicious chain of processes specifically `explorer.exe` > `cmd.exe` > `powershell.exe`.
@@ -327,7 +327,7 @@ Let's try searching for `cmd.exe`.
 
 ![](images/image-746.webp)
 
-*Timeline Explorer output*
+__Timeline Explorer output__
 
 We can see that two logs are found with the following details
 - Map Description: `Process creation`
@@ -363,14 +363,14 @@ First we just search `Trusted Installer` which gets us the following logs,
 
 ![](images/image-747.webp)
 
-*Output of search*
+__Output of search__
 
 We can see from the output that we have an MD5 hash of the created process from `E:\hidden\Trusted Installer.exe`.
 Let's grab the MD5 hash which is `BC76BD7B332AA8F6AEDBB8E11B7BA9B6` then pass it to VirusTotal as seen below,
 
 ![](images/image-748.webp)
 
-*Threat intelligence report of malware on VirusTotal*
+__Threat intelligence report of malware on VirusTotal__
 
 As you can see, most security vendors have flagged this executable as malicious.
 If we go under `Behaviour` then go to `MITRE ATT&CK Tactics and Techniques`, we will see a column for `Command and Control`.
@@ -378,11 +378,11 @@ In this column, is a clickable element labelled `Ingress Tool Transfer` which te
 
 ![](images/image-749.webp)
 
-*Behaviors page*
+__Behaviors page__
 
 ![](images/image-750.webp)
 
-*Ingress Tool Transfer*
+__Ingress Tool Transfer__
 
 **Answer:** `http://anam0rph.su/in.php`
 
@@ -397,7 +397,7 @@ We will see the following,
 
 ![](images/image-751.webp)
 
-*File create records*
+__File create records__
 
 Therefore, the malware drops multiple DLLs as well as an executable `C:\Users\Tomy\AppData\Local\Temp\Sahofivizu.exe`.
 Finding the MD5 hash for this is easy as we now have the actual file name.
@@ -405,7 +405,7 @@ We just search `Sahofivizu.exe` then find the following record,
 
 ![](images/image-752.webp)
 
-*Finding `Sahofivizu.exe` event logs*
+__Finding `Sahofivizu.exe` event logs__
 
 Which gives us the MD5 hash `7FE00CC4EA8429629AC0AC610DB51993`.
 

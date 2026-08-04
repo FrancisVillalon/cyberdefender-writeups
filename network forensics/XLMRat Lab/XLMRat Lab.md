@@ -18,7 +18,7 @@ The method of request we are looking for here is `GET`. Let's filter for those a
 
 ![](images/18c66b84d2ae7e77eb8d43f5cca2b0c3f257f24682123ad2a47b3624100eb5eb.webp)
 
-*Wireshark output of GET request filter*
+__Wireshark output of GET request filter__
 
 From the above, we can see a couple of requests being made. The first request is highly suspect because it is retrieving an image from a raw IP without a proper domain name. Legitimate services rarely, if ever, host content directly on a raw IP.
 
@@ -26,13 +26,13 @@ If we right-click and follow the HTTP stream, we can see that the image being re
 
 ![](images/31370ec11eae81a9d823c2dd0c65b21836e96961607d2a69c3c5344246cd4e78.webp)
 
-*HTTP response body from the raw IP*
+__HTTP response body from the raw IP__
 
 The response does not look typical of a JPEG despite the `Content-Type` being declared as `image/jpeg`. If we scroll down, we will see that this is actually a malicious PowerShell script with embedded binaries.
 
 ![](images/c3f5db2b4b05ed857c5b56dba494f59d0206701f71e43fbb8ce0466d398ae8b9.webp)
 
-*Malicious VBS script embedded in the fake image*
+__Malicious VBS script embedded in the fake image__
 
 It is clear `http://45.126.209.4:222/mdm.jpg` is a piece of malware.
 Furthermore, the other request with the `xlm.txt` only shows a script that reconstructs an obfuscated string.
@@ -52,7 +52,7 @@ To find the answer, we just need to perform an ASN lookup of `45.126.209.4`. The
 
 ![](images/ba22eacbf2264bc5ebed7d4f936f8ba4ddfd1d59e720e3d1f885e5b1bf8d1730.webp)
 
-*HackerTarget ASN lookup results for the malicious IP*
+__HackerTarget ASN lookup results for the malicious IP__
 
 **Answer:** `ReliableSite.Net`
 
@@ -68,19 +68,19 @@ If we inspect `mdm.jpg`, we will see that there are two executable files embedde
 
 ![](images/4302489d311e4e3cdc8baf11e0f82cda120e52c4d3cd4365e1d8980a44841b23.webp)
 
-*Export HTTP objects window in Wireshark*
+__Export HTTP objects window in Wireshark__
 
 We need to save `mdm.jpg` since that is what contains the binaries. We then create two copies of this image, and for each one we strip out everything that is not the binary we are trying to extract. We have two binaries, but one of them is the loader and one is the executable. These binaries are represented in hex, so we get the raw bytes from the files in CyberChef using `From Hex` and save them.
 
 ![](images/3796cd879372217dc468ac48d6e53128047c7a4c309707340cf9054964a71b3d.webp)
 
-*Extracted malware files after hex decoding*
+__Extracted malware files after hex decoding__
 
 However, only one of these embedded binaries is the actual malware executable; the other is a loader. To determine which is which, we need to inspect the code.
 
 ![](images/1a93ed6336ab2661173dd60094206499161e26829dfcbc7068447edc38e3337a.webp)
 
-*Code snippet from the malware script*
+__Code snippet from the malware script__
 
 If we resolve the obfuscation tricks, we will see that the binary defined by `$hexStringbbb` is passed as an argument to a function call from the binary defined by `$hexStringpe` — we can see this in `$EY`. Furthermore, the binary defined by `$hexStringbbb` is never loaded or executed directly in the script, which is characteristic of passing the main payload to a loader.
 
@@ -88,7 +88,7 @@ Therefore, we know that `$hexStringbbb` is likely the main malware executable, w
 
 ![](images/ca7eb268760debf50d84b359d35193df581acf055675e5e4e04b6c4230e3e96b.webp)
 
-*CyberChef SHA256 output for the extracted payload*
+__CyberChef SHA256 output for the extracted payload__
 
 **Answer:** `1eb7b02e18f67420f42b1d94e74f3b6289d92672a0fb1786c30c03d68e81d798`
 
@@ -104,7 +104,7 @@ For this, we submit the SHA256 sum of the malware executable to VirusTotal.
 
 ![](images/8d41d0d8b88e15c8f870868e7f16d465f69945b4161f7f9bf7f0cd4ca62940d2.webp)
 
-*VirusTotal detection results for the payload*
+__VirusTotal detection results for the payload__
 
 We can tell from the above output that the malware family is `AsyncRAT`.
 
@@ -122,7 +122,7 @@ To determine the timestamp of the malware's creation, we just need to pass the p
 
 ![](images/image-586.webp)
 
-*peframe output showing the PE header compilation timestamp*
+__peframe output showing the PE header compilation timestamp__
 
 **Answer:** `2023-10-30 15:08`
 
@@ -138,7 +138,7 @@ By inspecting the code and resolving the obfuscation tricks, we can find the LOL
 
 ![](images/image-587.webp)
 
-*Snippet of PowerShell script showing the obfuscated LOLBin reference*
+__Snippet of PowerShell script showing the obfuscated LOLBin reference__
 
 Removing the obfuscation — which is just inserting variable-length `#` strings into the plaintext — we get:
 
@@ -164,7 +164,7 @@ We can also grep for `WriteAllText`, which will give us the same result.
 
 ![](images/image-588.webp)
 
-*Grep output showing all WriteAllText calls in the script*
+__Grep output showing all WriteAllText calls in the script__
 
 **Answer:** `Conted.ps1, Conted.bat, Conted.vbs`
 
@@ -174,7 +174,7 @@ We can also grep for `WriteAllText`, which will give us the same result.
 
 ![](images/image-585.webp)
 
-*XLMRat Lab completion badge*
+__XLMRat Lab completion badge__
 
 I successfully completed XLMRat Blue Team Lab at @CyberDefenders!
 https://cyberdefenders.org/blueteam-ctf-challenges/achievements/francisvil3213/xlmrat/

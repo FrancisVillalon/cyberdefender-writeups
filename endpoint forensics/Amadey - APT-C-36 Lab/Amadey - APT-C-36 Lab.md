@@ -13,7 +13,7 @@ Let's have a look at the `pslist` and see if anything immediately stands out.
 
 ![](images/image-673.webp)
 
-*Pslist output showing two instances of lsass.exe*
+__Pslist output showing two instances of lsass.exe__
 
 If we manually look through the list we will see immediately two instances of `lsass.exe`.
 This is highly suspect as there should be one legitimate instance of `lsass.exe`.
@@ -24,7 +24,7 @@ Let's also check how this was invoked using `cmdline`.
 
 ![](images/image-674.webp)
 
-*Cmdline output showing the suspicious process running from a Temp directory*
+__Cmdline output showing the suspicious process running from a Temp directory__
 
 We can see from the output that the this process resides in a directory not typical of that of `lsass.exe`. Furthermore, it is running from a `Temp` directory. It is very likely that this program is a malicious executable masquerading as the legitimate `lsass.exe`.
 
@@ -32,7 +32,7 @@ If we also grep it's PID `2748` we will find that it spawns a `rundll32.exe`. Th
 
 ![](images/image-675.webp)
 
-*grep of PID 2748 revealing the spawned rundll32.exe child process*
+__grep of PID 2748 revealing the spawned rundll32.exe child process__
 
 **Answer:** `lssass.exe`
 
@@ -48,7 +48,7 @@ Another approach to this question is through the use of `filescan` since we alre
 
 ![](images/image-676.webp)
 
-*filescan output showing lssass.exe in the Temp directory and also in \Windows\System32\Tasks*
+__filescan output showing lssass.exe in the Temp directory and also in \Windows\System32\Tasks__
 
 Which outputs another interesting finding as well, which is that `lssass.exe` also resides in `\Windows\System32\Tasks`. This means that the malicious process is using task scheduler as one of its methods to maintain persistence.
 
@@ -65,7 +65,7 @@ Having identified the name of the malicious executable, we can check if it had e
 
 ![](images/image-677.webp)
 
-*netscan output showing lssass.exe connected to 41.75.84.12 over HTTP*
+__netscan output showing lssass.exe connected to 41.75.84.12 over HTTP__
 
 We can see here that it connected to `41.75.84.12` which is in the public IP address range. Furthermore, the connection was HTTP.
 
@@ -90,7 +90,7 @@ We can then use `grep` to search for `GET` requests.
 
 ![](images/image-678.webp)
 
-*grep output revealing two GET requests for cred64.dll and clip64.dll*
+__grep output revealing two GET requests for cred64.dll and clip64.dll__
 
 We see that two get requests are being made for files:
 - `/rock/Plugins/cred64.dll`
@@ -112,7 +112,7 @@ We can check what arguments `rundll32.exe` was invoked with to determine what wa
 
 ![](images/image-679.webp)
 
-*cmdline showing the argument passed to rundll32.exe pointing to clip64.dll*
+__cmdline showing the argument passed to rundll32.exe pointing to clip64.dll__
 
 **Answer:** `C:\Users\0xSh3rl0ck\AppData\Roaming\116711e5a2ab05\clip64.dll`
 
